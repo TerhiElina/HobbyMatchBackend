@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+    xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+    <title>Happening list</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            <h2>Tulevat tapahtumat</h2>
+            <a href="/add" class="btn btn-success">Lisää tapahtuma</a>
+            <a href="/grouplist" class="btn btn-success">Ryhmät</a> 
+            <a href="/login" class="btn btn-success">Kirjaudu</a>
+
+            
+        </div>
+    </div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Tapahtuma</th>
+                <th>Päivämäärä</th>
+                <th>Kellonaika</th>
+                <th>Kaupunki</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="happening : ${happenings}">
+                <td th:text="${happening.happeningName}"></td>
+                <td th:text="${happening.date}"></td>
+                <td th:text="${happening.formattedTime}"></td>
+                <td th:text="${happening.city}"></td>
+                <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{happeningId}(happeningId=${happening.happeningId})}" class="btn btn-danger">Delete</a></td>
+                <td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{happeningId}(happeningId=${happening.happeningId})}" class="btn btn-primary">Edit</a></td>
+                <td sec:authorize="hasAuthority('ADMIN')">
+                    <form th:action="@{/happenings/{happeningId}/join(happeningId=${happening.happeningId})}" method="post">
+                        <button type="submit" class="btn btn-primary">Ilmoittaudu</button>
+                    </form>
+                </td>         
+            </tr>
+        </tbody>
+    </table>
+    
+</body>
+</html>

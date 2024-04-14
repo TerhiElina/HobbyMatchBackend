@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add happening</title>
+</head>
+<body>
+    <h1>Lisää uusi tapahtuma</h1>
+    <div>
+        <form th:object="${happening}" th:action="@{save}" action="#"method="post">
+            <label for="happeningName">Tapahtuman nimi</label>
+            <input type="text" id="happeningName" th:field="*{happeningName}" />
+            <label for="date">Päivämäärä</label>
+            <input type="date" id="date" th:field="*{date}" />
+
+            <label for="formattedTime">Kellonaika</label>
+            <input type="time" id="formattedTime" th:field="*{formattedTime}" />
+
+            <label for="address">Katuosoite</label>
+            <input type="text" id="address" th:field="*{address}" />
+
+            <label for="postcode">Postinumero</label>
+            <input type="text" id="postcode" th:field="*{postcode}" />
+
+            <label for="city">Postitoimipaikka</label>
+            <input type="text" id="city" th:field="*{city}" />
+
+            <div style="clear: both; display: block; height: 10px;"></div>
+            <label for="groups">Ryhmä</label>
+            <select id="groups" 
+                th:field="*{group}"
+                class="form-control">
+            <option th:each="group: ${group}"
+                th:value="${group.groupId}"
+                th:text="${group.name}">
+            </option>  
+            </select>
+            <div style="clear: both; display: block; height: 10px;"></div>
+
+            <input type="submit" value="Save"></input>
+        </form>
+    </div>
+    
+</body>
+</html>

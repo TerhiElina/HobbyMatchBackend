@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grouplist</title>
+</head>
+<body>
+    <table class="table table-striped">
+        <tr>
+            <th>Ryhmät</th>
+            <th>Ryhmän kuvaus</th>
+        </tr>
+       <tr th:each ="group : ${groups}">
+        <td th:text="${group.name}"></td>
+        <td th:text="${group.description}"></td>
+       </tr> 
+    </table>
+    <a href="/addgroup" class="btn btn-success">Lisää uusi ryhmä</a>
+    
+</body>
+</html>
